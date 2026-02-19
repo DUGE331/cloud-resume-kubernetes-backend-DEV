@@ -10,4 +10,5 @@ Resources:
       Runtime: python3.11
       CodeUri: .
       Timeout: 10
-      Policies: AWSLambdaBasicExecutionRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
