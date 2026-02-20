@@ -65,15 +65,14 @@ Resources:
       AutoDeploy: true
 
   # Permission for API Gateway to invoke Lambda
-  LambdaPermissionForApiGatewayDev:
-    Type: AWS::Lambda::Permission
-    Properties:
-      FunctionName: !Ref LambdaVisitor
-      Action: lambda:InvokeFunction
-      Principal: apigateway.amazonaws.com
-      SourceArn: 
-      !Join 
-         - ''
-         - - 'arn:aws:execute-api:ap-southeast-2:385704849308:'
-         - !Ref CloudResumeLambdaDevApi
-         - '/*/*/dev-visitor'
+LambdaPermissionForApiGatewayDev:
+  Type: AWS::Lambda::Permission
+  Properties:
+    FunctionName: !Ref LambdaVisitor
+    Action: lambda:InvokeFunction
+    Principal: apigateway.amazonaws.com
+    SourceArn: !Join
+      - ''
+      - - 'arn:aws:execute-api:ap-southeast-2:385704849308:'
+        - !Ref CloudResumeLambdaDevApi
+        - '/*/*/dev-visitor'
