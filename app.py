@@ -1,40 +1,25 @@
 import boto3
 import os
-import json
 
-# DynamoDB setup
-dynamodb = boto3.resource("dynamodb")
-table_name = os.environ.get("VISITOR_TABLE", "CloudResumeVisitors-Dev")
+dynamodb = boto3.resource('dynamodb')
+table_name = os.environ['VISITOR_TABLE']
 table = dynamodb.Table(table_name)
 
 def lambda_handler(event, context):
-    method = event.get("httpMethod", "GET")
+    # Use the correct partition key name and type
+    key = {"visitor_count": 1}  # Number type, matches your table
 
-    if method == "GET":
-        # Return visitor count
-        response = table.get_item(Key={"id": 1})
-        count = response.get("Item", {}).get("count", 0)
-        return {
-            "statusCode": 200,
-            "body": json.dumps({"visitor_count": count})
-        }
+    # Get current count safely
+    response = table.get_item(Key=key)
+    count = response.get('Item', {}).get('count', 0)
 
-    elif method == "POST":
-        # Increment visitor count
-        table.update_item(
-            Key={"id": 1},
-            UpdateExpression="SET count = if_not_exists(count, :start) + :inc",
-            ExpressionAttributeValues={":inc": 1, ":start": 0},
-            ReturnValues="UPDATED_NEW"
-        )
-        return {
-            "statusCode": 200,
-            "body": json.dumps({"message": "Visitor added!"})
-        }
+    # Increment count
+    count += 1
 
-    else:
-        # Unsupported method
-        return {
-            "statusCode": 400,
-            "body": json.dumps({"message": "Unsupported method"})
-        }
+    # Write back to table
+    table.put_item(Item={"visitor_count": 1, "count": count})
+
+    return {
+        "statusCode": 200,
+        "body": {"visitor_count": count}
+    }
