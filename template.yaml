@@ -71,4 +71,9 @@ Resources:
       FunctionName: !Ref LambdaVisitor
       Action: lambda:InvokeFunction
       Principal: apigateway.amazonaws.com
-      SourceArn: arn:aws:execute-api:ap-southeast-2:385704849308:${CloudResumeLambdaDevApi}/*/*/dev-visitor
+      SourceArn: 
+      !Join 
+         - ''
+         - - 'arn:aws:execute-api:ap-southeast-2:385704849308:'
+         - !Ref CloudResumeLambdaDevApi
+         - '/*/*/dev-visitor'
