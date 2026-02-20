@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Cloud Resume Visitor Lambda
+Description: Cloud Resume Visitor Lambda (Dev)
 
 Resources:
   LambdaVisitor:
@@ -23,62 +23,3 @@ Resources:
           Properties:
             Path: /dev-visitor
             Method: ANY
-
-  # Dev API Gateway
-  CloudResumeLambdaDevApi:
-    Type: AWS::ApiGatewayV2::Api
-    Properties:
-      Name: CloudResumeLambdaDevApi
-      ProtocolType: HTTP
-      RouteSelectionExpression: "$request.method $request.path"
-      CorsConfiguration:
-        AllowCredentials: false
-        AllowHeaders:
-          - "*"
-        AllowMethods:
-          - "GET"
-          - "POST"
-          - "OPTIONS"
-        AllowOrigins:
-          - "http://localhost:8000"   # local testing origin
-        ExposeHeaders:
-          - "*"
-        MaxAge: 3600
-
-# Lambda Integration
-  CloudResumeLambdaDevIntegration:
-    Type: AWS::ApiGatewayV2::Integration
-    Properties:
-      ApiId: !Ref CloudResumeLambdaDevApi
-      IntegrationType: AWS_PROXY
-      IntegrationUri: !Sub arn:aws:apigateway:${AWS::ap-southeast-2}:lambda:path/2015-03-31/functions/${LambdaVisitor.Arn}/invocations
-      PayloadFormatVersion: "2.0"
-
-  # Route for GET/POST
-  CloudResumeLambdaDevRoute:
-    Type: AWS::ApiGatewayV2::Route
-    Properties:
-      ApiId: !Ref CloudResumeLambdaDevApi
-      RouteKey: "ANY /dev-visitor"
-      Target: !Sub "integrations/${CloudResumeLambdaDevIntegration}"
-
-  # Stage
-  CloudResumeLambdaDevStage:
-    Type: AWS::ApiGatewayV2::Stage
-    Properties:
-      ApiId: !Ref CloudResumeLambdaDevApi
-      StageName: dev
-      AutoDeploy: true
-
-  # Permission for API Gateway to invoke Lambda
-LambdaPermissionForApiGatewayDev:
-  Type: AWS::Lambda::Permission
-  Properties:
-    FunctionName: !Ref LambdaVisitor
-    Action: lambda:InvokeFunction
-    Principal: apigateway.amazonaws.com
-    SourceArn: !Join
-      - ''
-      - - 'arn:aws:execute-api:ap-southeast-2:385704849308:'
-        - !Ref CloudResumeLambdaDevApi
-        - '/*/*/dev-visitor'
