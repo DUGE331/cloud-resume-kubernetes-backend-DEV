@@ -17,6 +17,12 @@ Resources:
       Environment:
         Variables:
           VISITOR_TABLE: CloudResumeVisitors-Dev
+      Events:
+        DevVisitorApi:
+          Type: Api
+          Properties:
+            Path: /dev-visitor
+            Method: ANY
 
   # Dev API Gateway
   CloudResumeLambdaDevApi:
