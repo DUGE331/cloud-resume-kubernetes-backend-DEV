@@ -1,2 +1,1 @@
-def test_placeholder():
-    assert True
+# placeholder for future tests
