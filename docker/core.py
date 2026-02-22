@@ -17,3 +17,5 @@ def increment_visitor():
         ReturnValues="UPDATED_NEW"
     )
     return int(response["Attributes"]["count"])
+
+#to run cd docker docker run --env-file .env -p 8000:8000 visitor-counter
