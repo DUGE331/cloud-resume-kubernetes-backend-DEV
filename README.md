@@ -4,6 +4,7 @@ This is my enhanced version of the Cloud Resume Challenge, built with a modern c
 
 This repository represents the development (Dev) environment, focused on containerization, Kubernetes orchestration, automation, and scalability testing.
 
+
 🚀 Project Overview
 
 This project evolves the traditional Cloud Resume Challenge into a production-style system using:
@@ -20,12 +21,14 @@ Kubernetes deployment (Minikube for local cluster)
 
 Future production-ready networking with Ingress
 
+
 🏗 Architecture (Dev Version)
 Frontend → API → Visitor Service → DynamoDB
                     ↓
                 Docker
                     ↓
                Kubernetes
+               
 🔧 Technologies Used
 
 AWS Lambda
@@ -41,6 +44,7 @@ Kubernetes (Minikube)
 GitHub Actions (CI/CD)
 
 Python (FastAPI)
+
 
 ⚙️ Features Implemented
 ✅ CI/CD Pipeline
@@ -64,6 +68,7 @@ Deployment + Service YAML definitions
 Scalable pod configuration
 
 Secrets management for AWS credentials
+
 
 🧪 Planned Enhancements
 🔜 Ingress Controller
@@ -118,6 +123,7 @@ Integrate with frontend repository
 
 Deploy to managed Kubernetes (EKS or similar)
 
+
 📊 Why This Version?
 
 This project demonstrates:
@@ -133,6 +139,7 @@ Infrastructure scalability
 Production-grade deployment patterns
 
 It transforms a basic cloud resume into a DevOps-focused engineering project.
+
 
 🎯 Goal
 
