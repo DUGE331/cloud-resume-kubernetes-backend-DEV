@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     app: visitor-counter
-  type: NodePort       # For local Docker Desktop / Minikube
+  type: ClusterIP       # Change from nodeport to CLusterIP so i can organise dns
   ports:
     - protocol: TCP
       port: 8000
