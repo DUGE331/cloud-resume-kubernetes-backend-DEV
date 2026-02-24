@@ -22,3 +22,9 @@ spec:
             name: aws-credentials
         - configMapRef:
             name: visitor-config
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            cpu: 500m 
+            #added scaling requirements
