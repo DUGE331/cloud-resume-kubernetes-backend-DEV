@@ -4,10 +4,9 @@ metadata:
   name: visitor-counter-service
 spec:
   selector:
-    app: visitor-counter
-  type: ClusterIP       # Change from nodeport to CLusterIP so i can organise dns
+    app: visitor-counter   # must match your pod label
   ports:
     - protocol: TCP
-      port: 8000
-      targetPort: 8000
-      nodePort: 30000  # Pick a free port on your host machine
+      port: 80             # Ingress will connect here
+      targetPort: 8000     # FastAPI container port
+  type: ClusterIP
