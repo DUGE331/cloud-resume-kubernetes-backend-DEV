@@ -1,6 +1,6 @@
-☁️ CloudResume – DevOps Edition
+# ☁️ CloudResume – DevOps Edition
 
-This is my enhanced version of the Cloud Resume Challenge, built with a modern cloud-native architecture and deployed with terraform.
+## This is my enhanced version of the Cloud Resume Challenge, built with a modern cloud-native architecture and deployed with terraform.
 
 This repository represents the development (Dev) environment, focused on containerization, Kubernetes orchestration, CI/CD pipeline, automation and scalability testing.
 
